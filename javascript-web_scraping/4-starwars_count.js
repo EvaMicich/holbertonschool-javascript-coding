@@ -1,13 +1,25 @@
 #!/usr/bin/node
-const episodeNum = process.argv[2];
+const url = process.argv[2];
 const request = require('request');
-request('https://swapi-api.hbtn.io/api/films/', function (error, response, body) {
+let counter = 0;
+request(url, function (error, response, body) {
   if (error) {
     console.error(error);
   }
   const filmJson = JSON.parse(body);
-  //console.log(filmJson.results[0].characters);
-  const person = 'https://swapi-api.hbtn.io/api/people/18/';
-  const loc = person.indexOf('18');
-  console.log(loc);
+  const filmObj = filmJson.results;
+  //  iterate over the 7 films
+  for (const attributename of filmObj) {
+    //  access the character list of the film
+    // loop over characters
+    for (const character of attributename.characters) {
+    //  check if the character contains 18
+      if (character.indexOf('18') > -1) {
+      //  increase the counter if 18 is there
+        counter = counter + 1;
+      }
+    }
+  }
+  //  return the counter
+  console.log(counter);
 });
