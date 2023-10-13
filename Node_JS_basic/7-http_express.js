@@ -1,8 +1,8 @@
 const express = require('express');
 const fs = require('fs');
 const util = require('util');
-const readFile = util.promisify(fs.readFile);
 
+const readFile = util.promisify(fs.readFile);
 // Create Express application
 const app = express();
 const port = 1245;
@@ -23,9 +23,9 @@ async function processFile(filePath) {
     const csStudents = students.filter((student) => student.endsWith('CS'));
     const sweStudents = students.filter((student) => student.endsWith('SWE'));
 
-    return `This is the list of our students\nNumber of students: ${count}\n` +
-           `Number of students in CS: ${csStudents.length}. List: ${csStudents.map((s) => s.split(',')[0]).join(', ')}\n` +
-           `Number of students in SWE: ${sweStudents.length}. List: ${sweStudents.map((s) => s.split(',')[0]).join(', ')}`;
+    return `This is the list of our students\nNumber of students: ${count}\n`
+          + `Number of students in CS: ${csStudents.length}. List: ${csStudents.map((s) => s.split(',')[0]).join(', ')}\n`
+          + `Number of students in SWE: ${sweStudents.length}. List: ${sweStudents.map((s) => s.split(',')[0]).join(', ')}`;
   } catch (error) {
     return 'This is the list of our students\nError: Cannot load the database';
   }
